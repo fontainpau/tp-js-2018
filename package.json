@@ -1,0 +1,28 @@
+{
+  "scripts": {
+    "code-style": "xo",
+    "start": "sls offline start --useSeparateProcesses",
+    "init-db": "node initdb.js"
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2",
+    "serverless-offline": "^3.31.2",
+    "xo": "^0.23.0"
+  },
+  "dependencies": {
+    "mongoose": "^5.3.12",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2"
+  },
+  "pre-commit": [
+    "code-style"
+  ],
+  "xo": {
+    "space": 2,
+    "max-len": [
+      "error",
+      80,
+      2
+    ]
+  }
+}

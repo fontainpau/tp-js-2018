@@ -1,0 +1,29 @@
+service: list-sls
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  get_city:
+    handler: list-city.listHandler
+    events:
+    - http: POST /list-city
+
+  getAllUnicorns:
+    handler: get-transport.getAllUnicorns
+    events:
+    - http: POST /gettransport
+
+  inittransport:
+    handler: init-transport.init
+    events:
+    - http: POST /inittransport
+
+  updatetransport:
+    handler: update-transport.updating
+    events:
+    - http: POST /updatetransport
+
+plugins:
+- serverless-offline
