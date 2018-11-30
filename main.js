@@ -46,7 +46,7 @@ const calculRatio = async () => {
   const retCities = await getCity();
   console.log(retTransport);
   for (let i = 0; i < retTransport.length; i++) {
-    let div =
+    const div =
       (retTransport[i].unicorns * 0.8) + (retTransport[i].ponies * 0.4);
     console.log(div);
     let ratio = retCities[i][2] / ((div) ? div : 1);
@@ -59,7 +59,7 @@ const calculRatio = async () => {
 };
 
 const main = async () => {
-   await initTransport();
+  await initTransport();
   console.log((await calculRatio())[1]);
 };
 
