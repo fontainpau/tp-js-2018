@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {Transport} = require('./struct-db-transport');
+
 const randomInt = (min = 1, max = 12) => Math.floor(
   Math.random() * (max - min + 1)) +
   min;
