@@ -16,7 +16,7 @@ functions:
     - http: POST /gettransport
 
   inittransport:
-    handler: init-transport.init
+    handler: init-transports.init
     events:
     - http: POST /inittransport
 
