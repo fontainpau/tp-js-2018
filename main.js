@@ -75,15 +75,14 @@ const updateRanch = async city => {
     }
   }
 };
-const fonc=async()=>{
+const fonc = async () => {
   const ret1 = (await calculRatio())[0];
   console.log(ret1);
   await updateRanch(ret1);
-}
+};
 const main = async () => {
   await initTransport();
   setInterval(fonc, 2000);
-
 };
 
 main().then(() => {
