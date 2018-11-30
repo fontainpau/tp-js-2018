@@ -21,34 +21,33 @@ const initTransport = () => rp({
   json: true
 });
 
-const updateTransport = (cities, ponies, unicorns) => rp({
-  method: 'POST',
-  uri: 'http://localhost:3000/updatetransport',
-  body: {
-    cities,
-    ponies,
-    unicorns
-  },
-  json: true
-});
+// TODO uncomment this when feature ponies is handled
+// const updateTransport = (cities, ponies, unicorns) => rp({
+//   method: 'POST',
+//   uri: 'http://localhost:3000/updatetransport',
+//   body: {
+//     cities,
+//     ponies,
+//     unicorns
+//   },
+//   json: true
+// });
 
-const bestRatio = townList => townList.map(
-  town => [town[0], town[1] / town[2]]);
+// TODO const bestRatio = townList => townList.map(
+//   town => [town[0], town[1] / town[2]]);
 const maxRatio = townList => townList.reduce((a, b) => a[1] > b[1] ? a : b,
   ['', -Infinity]);
-// Const bestValue = mostVillains;
-const minRatio = townList => townList.reduce((a, b) => a[2] < b[2] ? a : b,
-  ['', -Infinity]);
+// TODO const bestValue = mostVillains;
+// const minRatio = townList => townList.reduce((a, b) => a[2] < b[2] ? a : b,
+//   ['', -Infinity]);
 
 const calculRatio = async () => {
   const citiesRatio = [];
   const retTransport = await getTransport();
   const retCities = await getCity();
-  console.log(retTransport);
   for (let i = 0; i < retTransport.length; i++) {
     const div =
       (retTransport[i].unicorns * 0.8) + (retTransport[i].ponies * 0.4);
-    console.log(div);
     let ratio = retCities[i][2] / ((div) ? div : 1);
     ratio = retCities[i][1] / ratio;
     citiesRatio.push(
@@ -66,7 +65,7 @@ const main = async () => {
 main().then(() => {
 });
 
-/* --------------Commentaire perso---------------*/
+/*TODO --------------Commentaire perso---------------*/
 // const ret = await getCity();
 // console.log(ret);
 // console.log(

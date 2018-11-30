@@ -19,7 +19,6 @@ mongoose.connect('mongodb://192.168.99.100:27017/unicorns-db');
 
 const getTransport = async () => {
   const a = await Transport.find({}).exec();
-  console.log(a);
   await mongoose.disconnect();
   return a;
 };
