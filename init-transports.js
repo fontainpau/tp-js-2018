@@ -15,8 +15,8 @@ const initialisation = async () => {
     {cities: 'Lyon', unicorns: randomInt(), ponies: randomInt()},
     {cities: 'Toulouse', unicorns: randomInt(), ponies: randomInt()},
     {cities: 'Grenoble', unicorns: randomInt(), ponies: randomInt()},
-    {cities: 'Lille', unicorns: randomInt(), ponies: randomInt()},
-    {cities: 'Ivry-Sur-Seine', unicorns: randomInt(), ponies: randomInt()}
+    {cities: 'Brest', unicorns: randomInt(), ponies: randomInt()},
+    {cities: 'Strasbourg', unicorns: randomInt(), ponies: randomInt()}
   ]);
   mongoose.disconnect();
 };

@@ -1,6 +1,3 @@
-// Bash --login '/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'
-// docker run -p 27017:27017 mongo
-// yarn run start
 const rp = require('request-promise');
 
 const getCity = () => rp({
@@ -33,6 +30,12 @@ const updateTransport = (cities, ponies, unicorns) => rp({
   json: true
 });
 
+const getWeather = (ville) =>rp({
+  method: 'POST',
+  uri: 'https://api.openweathermap.org/data/2.5/weather?q='+ville+',fr&appid=c21a75b667d6f7abb81f118dcf8d4611&units=metric',
+  json:true
+});
+
 // TODO const bestRatio = townList => townList.map(
 //   town => [town[0], town[1] / town[2]]);
 const maxRatio = townList => townList.reduce((a, b) => a[1] > b[1] ? a : b,
@@ -52,13 +55,16 @@ const calculRatio = async () => {
   for (let i = 0; i < retTransport.length; i++) {
     const div =
       (retTransport[i].unicorns * 0.8) + (retTransport[i].ponies * 0.4);
+    const retWeather = await getWeather(retCities[i][0]);
     let ratio = retCities[i][2] / ((div) ? div : 1);
-    ratio = retCities[i][1] / ratio;
+    ratio = retCities[i][1] / (ratio*retWeather['wind']['speed']);
     citiesRatio.push(
-      [retTransport[i].cities, ratio, retCities[i][2], retCities[i][1]]);
+      [retTransport[i].cities, ratio, retCities[i][2], retCities[i][1],retWeather['wind']['speed']]);
   }
-  // Console.log(citiesRatio);
-  return (maxRatio(citiesRatio));
+  console.log('[Ville   , Ratio calculé,  km,  nb mechants, vitesse vent]');
+  console.log(citiesRatio);
+  const buff=maxRatio(citiesRatio);
+  return (buff);
 };
 
 const updateRanch = async city => {
@@ -77,7 +83,7 @@ const updateRanch = async city => {
 };
 const fonc = async () => {
   const ret1 = (await calculRatio())[0];
-  console.log(ret1);
+  console.log('Le Héro se rend à : ',ret1);
   await updateRanch(ret1);
 };
 const main = async () => {

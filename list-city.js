@@ -5,9 +5,9 @@ const createTownList = () => [
   'Paris',
   'Lyon',
   'Grenoble',
-  'Lille',
   'Toulouse',
-  'Ivry-Sur-Seine'
+  'Brest',
+  'Strasbourg'
 ].map(town => [town, randomInt(1, 1000), randomInt(1, 10000)]);
 
 const listHandler = async () => ({
