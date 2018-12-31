@@ -30,19 +30,14 @@ const updateTransport = (cities, ponies, unicorns) => rp({
   json: true
 });
 
-const getWeather = (ville) =>rp({
+const getWeather = ville => rp({
   method: 'POST',
-  uri: 'https://api.openweathermap.org/data/2.5/weather?q='+ville+',fr&appid=c21a75b667d6f7abb81f118dcf8d4611&units=metric',
-  json:true
+  uri: 'https://api.openweathermap.org/data/2.5/weather?q=' + ville + ',fr&appid=c21a75b667d6f7abb81f118dcf8d4611&units=metric',
+  json: true
 });
 
-// TODO const bestRatio = townList => townList.map(
-//   town => [town[0], town[1] / town[2]]);
 const maxRatio = townList => townList.reduce((a, b) => a[1] > b[1] ? a : b,
   ['', -Infinity]);
-// TODO const bestValue = mostVillains;
-// const minRatio = townList => townList.reduce((a, b) => a[2] < b[2] ? a : b,
-//   ['', -Infinity]);
 
 const randomInt = (min = 1, max = 12) => Math.floor(
   Math.random() * (max - min + 1)) +
@@ -55,16 +50,14 @@ const calculRatio = async () => {
   for (let i = 0; i < retTransport.length; i++) {
     const div =
       (retTransport[i].unicorns * 0.8) + (retTransport[i].ponies * 0.4);
-    const retWeather = await getWeather(retCities[i][0]);
     let ratio = retCities[i][2] / ((div) ? div : 1);
-    ratio = retCities[i][1] / (ratio*retWeather['wind']['speed']);
+    ratio = retCities[i][1] / ratio;
     citiesRatio.push(
-      [retTransport[i].cities, ratio, retCities[i][2], retCities[i][1],retWeather['wind']['speed']]);
+      [retTransport[i].cities, ratio, retCities[i][2], retCities[i][1]]);
   }
-  console.log('[Ville   , Ratio calculé,  km,  nb mechants, vitesse vent]');
+  console.log('[Ville   , Ratio calculé,  km,  nb mechants]');
   console.log(citiesRatio);
-  const buff=maxRatio(citiesRatio);
-  return (buff);
+  return (maxRatio(citiesRatio));
 };
 
 const updateRanch = async city => {
@@ -83,7 +76,9 @@ const updateRanch = async city => {
 };
 const fonc = async () => {
   const ret1 = (await calculRatio())[0];
-  console.log('Le Héro se rend à : ',ret1);
+  console.log('Le Héro se rend à : ', ret1);
+  const retWeather = await getWeather(ret1);
+  console.log('La température dans cette ville est de ', retWeather.main.temp, ' degrès.');
   await updateRanch(ret1);
 };
 const main = async () => {
@@ -93,21 +88,3 @@ const main = async () => {
 
 main().then(() => {
 });
-
-/*  TODO --------------Commentaire perso---------------*/
-//  api google
-//  ember
-// const ret = await getCity();
-// console.log(ret);
-// console.log(
-//   'Number villains : ' + minRatio(ret)[0] + " " + mostVillains(ret)[1]);
-// console.log(
-//   'Best distance : ' + bestDistance(ret)[0] + " " + bestDistance(ret)[2]);
-// console.log(bestRatio(ret));
-// console.log(`Best value : ${bestValue(bestRatio(ret)).join(' ')}`);
-// ret2 = await getTransport();
-// console.log(ret2);
-// console.log(ret2[1]["cities"],ret2[1]["ponies"],ret2[1]["unicorns"]);
-// await updateTransport("Lyon", 8, 10);
-// ret2 = await getTransport();
-// console.log(ret2[1]["cities"],ret2[1]["ponies"],ret2[1]["unicorns"]);
