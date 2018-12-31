@@ -5,7 +5,7 @@ AXELLE ESCAILLAS, CAMILIA ABRIKH, PAUL FONTAINE
 
 Pour lancer le projet :
 
--Ouvrir Docker (ici dans le cas d'une version terminal de docker):
+- Ouvrir Docker (ici dans le cas d'une version terminal de docker):
   "Bash --login '/Applications/Docker/Docker Quickstart Terminal.app/Contents/Resources/Scripts/start.sh'"
 
 - Lancer un Docker pour la base de donnée (MongoDB)
