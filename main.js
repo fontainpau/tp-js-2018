@@ -18,7 +18,6 @@ const initTransport = () => rp({
   json: true
 });
 
-// TODO uncomment this when feature ponies is handled
 const updateTransport = (cities, ponies, unicorns) => rp({
   method: 'POST',
   uri: 'http://localhost:3000/updatetransport',
